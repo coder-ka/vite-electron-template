@@ -1,0 +1,21 @@
+{
+  "name": "electron-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "watch": "tsx builder/watch.ts",
+    "build": "tsc && tsx builder/build.ts"
+  },
+  "devDependencies": {
+    "electron": "^25.3.1",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

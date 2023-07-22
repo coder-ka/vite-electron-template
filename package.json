@@ -1,0 +1,12 @@
+{
+  "name": "vite-electron-builder-react",
+  "version": "1.0.0",
+  "workspaces": [
+    "electron-app",
+    "page"
+  ],
+  "scripts": {
+    "watch": "npm run watch -w electron-app",
+    "build": "npm run watch -w electron-app"
+  }
+}
