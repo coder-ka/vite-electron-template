@@ -8,11 +8,12 @@ export default defineConfig({
       entry: [
         resolve(__dirname, "src/main.ts"),
         resolve(__dirname, "src/preload.ts"),
+        resolve(__dirname, ".electron-builder.config.ts"),
       ],
       formats: ["cjs"],
     },
     rollupOptions: {
-      external: ["electron", /node:.*/],
+      external: ["electron", "electron-builder", /node:.*/],
     },
   },
 });

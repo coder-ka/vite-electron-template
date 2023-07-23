@@ -34,3 +34,9 @@ Basically you can use any template for `page` dir but there is only two requirem
 
 1. The package name _MUST_ be `'page'`.
 2. The html file `index.html` _MUST_ be positioned at the root of the output directory.(Usually it is the default option)
+
+# Draft Release
+
+Pushing commit to `main` branch invoke github actions to automatically create draft release.
+
+You can set additional environment variables e.g. `CSC_LINK` to code sigining for mac build in `.github/workflows/draft-release.yml`.

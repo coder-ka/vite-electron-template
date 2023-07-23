@@ -1,0 +1,46 @@
+name: Draft Release
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    env:
+      dist-dir: ./electron-app/dist
+
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Install Build Dependencies
+        run: npm i
+
+      - name: Build distribution files
+        run: npm run build
+
+      - name: Install Distribution Dependencies
+        working-directory: ${{env.dist-dir}}
+        run: npm ci
+
+      - name: Execute electron builder
+        working-directory: ${{env.dist-dir}}
+        run: npx electron-builder -c .electron-builder.config.cjs -p 'always'
+        env:
+          # Code Signing params
+          # See https://www.electron.build/code-signing
+          # CSC_LINK: ''
+          # CSC_KEY_PASSWORD: ''
+          # Publishing artifacts
+          GH_TOKEN: ${{ secrets.github_token }} # GitHub token, automatically provided (No need to define this secret in the repo settings)

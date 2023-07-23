@@ -1,5 +1,22 @@
 {
   "name": "app-name",
+  "description": "description of app",
   "version": "0.0.0",
-  "main": "main.cjs"
+  "main": "main.cjs",
+  "homepage": "https://github.com/coder-ka/vite-electron-template",
+  "author": {
+    "name": "Katsuyuki Oeda",
+    "email": "katsu.amagramer@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coder-ka/vite-electron-template"
+  },
+  "bugs": {
+    "url": "https://github.com/coder-ka/vite-electron-template/issues/new?assignees=coder-ka&labels=bug&projects=&template=bug_report.md&title="
+  },
+  "devDependencies": {
+    "electron": "^25.3.1",
+    "electron-builder": "^24.4.0"
+  }
 }
