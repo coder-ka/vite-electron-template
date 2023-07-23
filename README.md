@@ -36,4 +36,4 @@ Basically you can use any template for `page` dir but there is only two requirem
 
 Pushing commit to `main` branch invoke github actions to automatically create draft release.
 
-You can set additional environment variables e.g. `CSC_LINK` to code sigining for mac build in `.github/workflows/draft-release.yml`.
+You can set additional environment variables (e.g. `CSC_LINK` for code sigining in mac build) in `.github/workflows/draft-release.yml`.
