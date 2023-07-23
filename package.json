@@ -7,6 +7,6 @@
   ],
   "scripts": {
     "watch": "npm run watch -w electron-app",
-    "build": "npm run watch -w electron-app"
+    "build": "npm run build -w electron-app"
   }
 }
