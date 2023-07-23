@@ -10,9 +10,6 @@ npm i
 
 # Development
 npm run watch
-
-# Production build
-npm run build
 ```
 
 ## Changing Vite template
