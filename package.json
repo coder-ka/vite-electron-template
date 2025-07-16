@@ -8,5 +8,8 @@
   "scripts": {
     "watch": "npm run watch -w electron-app",
     "build": "npm run build -w electron-app"
+  },
+  "devDependencies": {
+    "procm-mcp": "^0.0.32"
   }
 }
