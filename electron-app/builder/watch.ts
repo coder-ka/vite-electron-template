@@ -10,44 +10,50 @@ let electronApp: ChildProcess | null = null;
 createServer({
   root: `${__dirname}/../../page`,
 }).then(async (server) => {
-  await server.listen();
+  try {
+    await server.listen();
 
-  if (server.resolvedUrls?.local) {
-    const pageURL = server.resolvedUrls.local[0];
+    if (server.resolvedUrls?.local) {
+      const pageURL = server.resolvedUrls.local[0];
 
-    process.env.VITE_PAGE_URL = pageURL;
+      process.env.VITE_PAGE_URL = pageURL;
 
-    build({
-      root: `${__dirname}/..`,
-      build: {
-        watch: {},
-      },
-      mode: "development",
-      plugins: [
-        {
-          name: "restart-electron",
-          closeBundle() {
-            /** Kill electron if process already exist */
-            if (electronApp !== null) {
-              electronApp.removeListener("exit", process.exit);
-              electronApp.kill("SIGINT");
-              electronApp = null;
-            }
-
-            /** Spawn new electron process */
-            electronApp = spawn(
-              String(electronPath),
-              ["--inspect", `${__dirname}/../dist/main.cjs`],
-              {
-                stdio: "inherit",
-              }
-            );
-
-            /** Stops the watch script when the application has been quit */
-            electronApp.addListener("exit", process.exit);
-          },
+      await build({
+        root: `${__dirname}/..`,
+        build: {
+          watch: {},
         },
-      ],
-    });
+        mode: "development",
+        plugins: [
+          {
+            name: "restart-electron",
+            closeBundle() {
+              /** Kill electron if process already exist */
+              if (electronApp !== null) {
+                electronApp.removeListener("exit", process.exit);
+                electronApp.kill("SIGINT");
+                electronApp = null;
+              }
+
+              /** Spawn new electron process */
+              electronApp = spawn(
+                String(electronPath),
+                // --no-sandbox is only required for wsl2 environments and only for development.Do not use it in production!
+                ["--inspect", "--no-sandbox", `${__dirname}/../dist/main.cjs`],
+                {
+                  stdio: "inherit",
+                }
+              );
+
+              /** Stops the watch script when the application has been quit */
+              electronApp.addListener("exit", process.exit);
+            },
+          },
+        ],
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
   }
 });
